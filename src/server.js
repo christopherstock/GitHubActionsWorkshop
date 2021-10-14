@@ -10,7 +10,7 @@ const server = express();
 
 server.get('/', (req, res) => {
     res.send('Hello World. This is the result from the base route.');
-} );
+});
 server.get('/user', (req, res) => {
     const users = [
         {name: 'John Smith',    username: 'jsmith'},
