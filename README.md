@@ -3,6 +3,15 @@ CI/CD-Pipeline with GitHub Actions for an Express.js REST-Server application.
 
 # CI/CD Pipeline State
 ![Pipeline State](https://github.com/christopherstock/GitHubActionsWorkshop/actions/workflows/node.js.yml/badge.svg)
+___
+
+# Pipeline Features
+- Production Build and packaging via Webpack
+- Unit-Tests with Coverage and XML-Report generation
+- Code Inspection with ESLint and XML-Report generation
+- JSDoc JavaScript sourcecode documentation generation
+- GitHub Release creation on Git Tag push
+- Dockerize, run and request Node.js application inside a Docker container
 
 ___
 
