@@ -1,0 +1,32 @@
+name: CI/CD for Node.js app
+
+on:
+
+  push:
+    branches: [ main ]
+    tags: [ '*\.*\.*' ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  build-production:
+    name: Build Production App
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout GitHub Repository
+      uses: actions/checkout@v2
+    - name: Use Node.js 14.18
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14.18
+        cache: 'npm'
+    - name: Install npm packages
+      run: npm install
+    - name: Build Production App Bundle
+      run: npm run webpack-production
+    - name: Upload Production App Bundle to Build Artefacts
+      uses: actions/upload-artifact@v1
+      with:
+        name: app-bundle
+        path: public/app-bundle.js
