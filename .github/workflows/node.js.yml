@@ -85,3 +85,23 @@ jobs:
       with:
         name: linter-results
         path: public/linter-results.xml
+
+  generate-jsdoc:
+    name: Generate Documentation
+    needs: [run-unit-tests, run-code-inspection]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout GitHub Repository
+      uses: actions/checkout@v2
+    - name: Use Node.js 14.18
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14.18
+        cache: 'npm'
+    - run: npm install
+    - run: npm run jsdoc
+    - name: Upload JSDoc documentation
+      uses: actions/upload-artifact@v1
+      with:
+        name: jsdoc-sourcecode-documentation
+        path: public/jsdoc
