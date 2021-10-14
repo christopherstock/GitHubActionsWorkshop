@@ -55,10 +55,10 @@ jobs:
     - name: Upload Test Report Artefact
       uses: actions/upload-artifact@v1
       with:
-        name: test-results
+        name: test-results-${{ matrix.os }}-${{ matrix.node-version }}
         path: public/test-results.xml
     - name: Upload Test Coverage Report Artefact
       uses: actions/upload-artifact@v1
       with:
-        name: test-coverage
+        name: test-coverage-${{ matrix.os }}-${{ matrix.node-version }}
         path: public/coverage
