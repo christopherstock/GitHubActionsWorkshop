@@ -37,10 +37,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [12.x, 13.x, 14.x, 15.x, 16.x]
+        node-version: [14.x, 16.x]
         # See supported Node.js release schedule at
         # https://nodejs.org/en/about/releases/
-        os: [ubuntu-latest, ubuntu-20.04, ubuntu-18.04]
+        os: [ubuntu-latest, ubuntu-18.04]
     steps:
     - name: Checkout GitHub Repository
       uses: actions/checkout@v2
