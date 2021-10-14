@@ -3,7 +3,7 @@ name: CI/CD for Node.js app
 on:
 
   push:
-    branches: [ main ]
+    branches: [ * ]
     tags: [ '*\.*\.*' ]
   pull_request:
     branches: [ main ]
