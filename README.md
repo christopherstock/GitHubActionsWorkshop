@@ -1,5 +1,5 @@
 # GitHub Actions
-This app will demonstrate a CI/CD setup with GitHub Actions for an Express.js REST-Server application.
+CI/CD-Pipeline with GitHub Actions for an Express.js REST-Server application.
 
 # CI/CD Pipeline State
 ![Pipeline State](https://github.com/christopherstock/GitHubActionsWorkshop/actions/workflows/node.js.yml/badge.svg)
