@@ -31,8 +31,8 @@ http://0.0.0.0:8181/user
 
 .. or perform a request using **cURL**:
 ```
-curl -v http://0.0.0.0:8181
-curl -v http://0.0.0.0:8181/user
+curl -i http://0.0.0.0:8181
+curl -i http://0.0.0.0:8181/user
 ```
 
 ## Integration Tests
