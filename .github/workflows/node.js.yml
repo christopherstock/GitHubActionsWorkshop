@@ -30,3 +30,35 @@ jobs:
       with:
         name: app-bundle
         path: public/app-bundle.js
+
+  run-unit-tests:
+    name: Unit Tests
+    needs: build-production
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: [12.x, 13.x, 14.x, 15.x, 16.x]
+        # See supported Node.js release schedule at
+        # https://nodejs.org/en/about/releases/
+        os: [ubuntu-latest, ubuntu-20.04, ubuntu-18.04]
+    steps:
+    - name: Checkout GitHub Repository
+      uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm install
+    - run: echo Running Jest Unit tests
+    - run: npm test
+    - name: Upload Test Report Artefact
+      uses: actions/upload-artifact@v1
+      with:
+        name: test-results
+        path: public/test-results.xml
+    - name: Upload Test Coverage Report Artefact
+      uses: actions/upload-artifact@v1
+      with:
+        name: test-coverage
+        path: public/coverage
