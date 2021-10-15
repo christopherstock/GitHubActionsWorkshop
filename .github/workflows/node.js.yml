@@ -24,7 +24,9 @@ jobs:
     - name: Install npm packages
       run: npm install
     - name: Start app
-      run: npm start
+      run: npm start &
+    - name: Send a cURL Request to the Node.js App
+      run: curl -i 0.0.0.0:8181/user
 
   build-production:
     needs: hello-world
@@ -179,7 +181,7 @@ jobs:
       - name: Sleep 5 seconds (wait till Express.js app is running)
         run: sleep 5s
       - name: Send a cURL request to the Docker container
-        run: curl --connect-timeout 5 -i 0.0.0.0:45678/user
+        run: curl -i 0.0.0.0:45678/user
       - name: Stop the Docker Container
         run: docker stop express-js-app-container
       - name: Wait until Docker Container is down
