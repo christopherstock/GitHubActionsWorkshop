@@ -10,8 +10,8 @@ on:
 
 jobs:
 
-  hello-world:
-    name: First Pipeline Job
+  npm-start:
+    name: Start Node.js App
     runs-on: ubuntu-latest
     steps:
     - name: Checkout GitHub Repository
@@ -26,10 +26,10 @@ jobs:
     - name: Start app
       run: npm start &
     - name: Send cURL Request to the Node.js App
-      run: curl 0.0.0.0:8181/user
+      run: curl -i 0.0.0.0:8181/user
 
   build-production:
-    needs: hello-world
+    needs: npm-start
     name: Build Production App
     runs-on: ubuntu-latest
     steps:
