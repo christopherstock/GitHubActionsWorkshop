@@ -25,8 +25,8 @@ jobs:
       run: npm install
     - name: Start app
       run: npm start &
-    - name: Send a cURL Request to the Node.js App
-      run: curl -i 0.0.0.0:8181/user
+    - name: Send cURL Request to the Node.js App
+      run: curl 0.0.0.0:8181/user
 
   build-production:
     needs: hello-world
