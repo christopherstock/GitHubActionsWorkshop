@@ -8,4 +8,4 @@ COPY public/* public/
 EXPOSE 8181
 
 # run the app bundle with node
-CMD [ "node", "./public/app-bundle.js" ]
+CMD ["node", "./public/app-bundle.js"]

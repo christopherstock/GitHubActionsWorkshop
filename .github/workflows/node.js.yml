@@ -162,7 +162,7 @@ jobs:
         omitBody: true
         removeArtifacts: true
 
-  docker-job:
+  dockerize:
     runs-on: ubuntu-latest
     needs: build-production
     name: Dockerize Production App
