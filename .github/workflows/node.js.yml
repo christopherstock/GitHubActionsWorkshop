@@ -29,7 +29,6 @@ jobs:
       run: curl -i 0.0.0.0:8181/user
 
   build-production:
-    needs: npm-start
     name: Build Production App
     runs-on: ubuntu-latest
     steps:
