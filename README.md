@@ -1,5 +1,6 @@
 # GitHub Actions
 CI/CD-Pipeline with GitHub Actions for an Express.js REST-Server application.
+___
 
 # CI/CD Pipeline State
 ![Pipeline State](https://github.com/christopherstock/GitHubActionsWorkshop/actions/workflows/node.js.yml/badge.svg)
