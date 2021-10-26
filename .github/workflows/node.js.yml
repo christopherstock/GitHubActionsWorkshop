@@ -160,3 +160,28 @@ jobs:
         allowUpdates: true
         omitBody: true
         removeArtifacts: true
+
+  dockerize:
+    runs-on: ubuntu-latest
+    needs: build-production
+    name: Dockerize Production App
+    steps:
+      - name: Checkout GitHub Repository
+        uses: actions/checkout@v2
+      - name: Download Production Build Artefact
+        uses: actions/download-artifact@v1
+        with:
+          name: app-bundle
+          path: public
+      - name: Build Docker Image from Dockerfile
+        run: docker build . --tag express-js-app:14.18
+      - name: Create and run Docker Container from Docker Image
+        run: docker run --name express-js-app-container --detach --publish 45678:8181 --tty express-js-app:14.18
+      - name: Sleep 5 seconds (wait till Express.js app is running)
+        run: sleep 5s
+      - name: Send a cURL request to the Docker container
+        run: curl -i 0.0.0.0:45678/user
+      - name: Stop the Docker Container
+        run: docker stop express-js-app-container
+      - name: Wait until Docker Container is down
+        run: docker wait express-js-app-container
