@@ -123,3 +123,40 @@ jobs:
       with:
         name: jsdoc-sourcecode-documentation
         path: public/jsdoc
+
+  create-github-release:
+    name: Create GitHub Release
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
+    needs: generate-jsdoc
+    runs-on: ubuntu-latest
+    steps:
+    - name: Parse release version from git tag
+      run: echo "release-version=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+    - name: Print out parsed release version
+      run: echo Parsed release version is:${{ env.release-version }}
+    - name: Download Production Build Artefact
+      uses: actions/download-artifact@v1
+      with:
+        name: app-bundle
+        path: public
+    - name: Delete Production Build Artefact
+      uses: geekyeggo/delete-artifact@v1
+      with:
+        name: app-bundle
+    - name: Rename Production Build Artefact by inserting release version
+      run: mv "public/app-bundle.js" "public/app-bundle-v${{ env.release-version }}.js"
+    - name: Upload Renamed Production Build Artefact
+      uses: actions/upload-artifact@v1
+      with:
+        name: app-bundle-v${{ env.release-version }}
+        path: public/app-bundle-v${{ env.release-version }}.js
+    - name: Create GitHub Release
+      uses: ncipollo/release-action@v1
+      with:
+        name: Release v${{ env.release-version }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag: ${{ env.release-version }}
+        artifacts: 'public/app-bundle-v${{ env.release-version }}.js'
+        allowUpdates: true
+        omitBody: true
+        removeArtifacts: true
