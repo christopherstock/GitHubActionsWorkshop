@@ -80,3 +80,26 @@ jobs:
       with:
         name: test-coverage-${{ matrix.os }}-${{ matrix.node-version }}
         path: public/coverage/clover.xml
+
+  run-code-inspection:
+    name: Code Inspection
+    needs: build-production
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout GitHub Repository
+      uses: actions/checkout@v2
+    - name: Use Node.js 14.18
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14.18
+        cache: 'npm'
+    - run: npm install
+    - name: Run ESLint Scan on app sourcecode
+      run: npm run eslint-scan
+    - name: Generate ESLint Report from app sourcecode scan
+      run: npm run eslint-report
+    - name: Upload Linter Report Artefact
+      uses: actions/upload-artifact@v1
+      with:
+        name: linter-results
+        path: public/linter-results.xml
