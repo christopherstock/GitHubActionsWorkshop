@@ -103,7 +103,7 @@ Via Curl:
 curl -i localhost:45678
 curl -i localhost:45678/user
 ```
-Latter will yield:
+Latter will result in:
 ```
 HTTP/1.1 200 OK
 X-Powered-By: Express
