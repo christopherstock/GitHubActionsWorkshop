@@ -1,6 +1,3 @@
-
-throw 'error!';
-
 const express = require('express');
 
 /** Host address to establish the Express.js server on. */
